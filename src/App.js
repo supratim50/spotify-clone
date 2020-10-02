@@ -15,7 +15,6 @@ function App() {
     const hash = getTokenFromUrl();
     window.location.hash = "";
     const _token = hash.access_token;
-    console.log(_token);
     if (_token) {
       dispatch({
         type: "SET_TOKEN",
@@ -39,11 +38,17 @@ function App() {
           playlists: playlists,
         });
       });
+      spotify.getPlaylist("3BShTadzhvw6QzeFZnH86M").then((response) => {
+        // console.log("🙇 ", user);
+        console.log(response);
+        // console.log("👾 ", token);
+        dispatch({
+          type: "SET_DISCOVER_WEEKLY",
+          discover_weekly: response,
+        });
+      });
     }
   }, []);
-
-  console.log("🙇 ", user);
-  console.log("👾 ", token);
 
   return (
     <div className="app">
